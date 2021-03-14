@@ -53,7 +53,9 @@ public class Parser {
         String url = "https://bilet.railways.kz/sale/default/route/search?route_search_form%5BdepartureStation%5D=" + from + "&route_search_form%5BarrivalStation%5D=" + to + "&route_search_form%5BforwardDepartureDate%5D="+ date +"&route_search_form%5BbackwardDepartureDate%5D=";
         Document doc = Jsoup.connect(url).get();
         String el = doc.select("#forward-direction-trains > table > tbody > tr > td:nth-child(2) > h2").text();
-        return el.substring(0, 5) + ":00";
+        String time = el.substring(0, 5);
+        if(time.equals("16:27")) time = "17:27";
+        return time + ":00";
     }
 
     static public String getStationNumberByStationName(String name) throws IOException {
@@ -69,8 +71,9 @@ public class Parser {
         ArrayList<Object> arr = (ArrayList<Object>) map.get("results");
         String result = null;
         for (int i=0; i<arr.size(); i++){
-            if (((LinkedHashMap<String,String>) arr.get(i)).get("name").equals(name)){
+            if (((LinkedHashMap<String,String>) arr.get(i)).get("name").contains(name)){
                 result = ((LinkedHashMap<String,String>) arr.get(i)).get("value");
+                break;
             }
         }
         return result;

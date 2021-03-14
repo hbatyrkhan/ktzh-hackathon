@@ -45,6 +45,10 @@ public class DefaultController {
                 from = "АЛМАТЫ 1";
                 to = "АКТОБЕ-1";
                 break;
+            case "003Ц":
+                from = "АЛМАТЫ";
+                to = "НУР-СУЛТАН";
+                break;
             default:
                 return ResponseEntity.badRequest().build();
         }
