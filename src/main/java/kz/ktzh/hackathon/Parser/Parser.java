@@ -18,7 +18,7 @@ import java.util.*;
 
 public class Parser {
 
-    public ParserResponseDto getParserData(String from, String to, String date, String trainNumber) throws IOException {
+    static public ParserResponseDto getParserData(String from, String to, String date, String trainNumber) throws IOException {
         ParserResponseDto dto = new ParserResponseDto();
         dto.setDate(date);
         dto.setFrom(from);
@@ -44,19 +44,19 @@ public class Parser {
         return dto;
     }
 
-    public String reverseFormat(String date){
+    static public String reverseFormat(String date){
         String[] els = date.split("-");
         return els[2] + "-" + els[1] + "-" + els[0];
     }
 
-    public String getExactTime(String from, String to, String date, String trainNumber) throws IOException {
+    static public String getExactTime(String from, String to, String date, String trainNumber) throws IOException {
         String url = "https://bilet.railways.kz/sale/default/route/search?route_search_form%5BdepartureStation%5D=" + from + "&route_search_form%5BarrivalStation%5D=" + to + "&route_search_form%5BforwardDepartureDate%5D="+ date +"&route_search_form%5BbackwardDepartureDate%5D=";
         Document doc = Jsoup.connect(url).get();
         String el = doc.select("#forward-direction-trains > table > tbody > tr > td:nth-child(2) > h2").text();
         return el.substring(0, 5) + ":00";
     }
 
-    public String getStationNumberByStationName(String name) throws IOException {
+    static public String getStationNumberByStationName(String name) throws IOException {
         URL url = new URL("https://bilet.railways.kz/api/v1/ktj/station/search?q="+name);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestProperty("accept", "application/json");
@@ -76,7 +76,7 @@ public class Parser {
         return result;
     }
 
-    public ArrayList<String> getStationsList(String stationNumber, String trainNumber, String date) throws IOException {
+    static public ArrayList<String> getStationsList(String stationNumber, String trainNumber, String date) throws IOException {
         URL url = new URL("https://bilet.railways.kz/api/v1/ktj/train/route/html");
         URLConnection con = url.openConnection();
         HttpURLConnection http = (HttpURLConnection)con;
