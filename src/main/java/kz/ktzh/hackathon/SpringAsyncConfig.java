@@ -17,14 +17,14 @@ import java.util.concurrent.ExecutionException;
 
 @Configuration
 @EnableScheduling
-public class SpringScheduledConfig {
+public class SpringAsyncConfig {
     @Autowired
     private FirebaseInitializer firebaseInitializer;
     @Autowired
     private RouteService routeService;
 
-    @Scheduled(fixedRate = 1800000)
-    public void scheduleFixedRateTask() throws ExecutionException, InterruptedException {
+    @Scheduled(cron = "0 0/30 * * * ?")
+    public void periodicDataParse() throws ExecutionException, InterruptedException {
         Firestore firestore = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> data = firestore.collection("parsed_data").get();
         List<QueryDocumentSnapshot> documents = data.get().getDocuments();
