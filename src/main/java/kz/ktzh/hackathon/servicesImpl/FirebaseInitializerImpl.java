@@ -30,7 +30,6 @@ import java.util.concurrent.Future;
 public class FirebaseInitializerImpl implements FirebaseInitializer {
 
     @Override
-    @Async
     public Future<ParserResponseDto> sendData(String from, String to, String date, String route) {
         ParserResponseDto data;
         try {
