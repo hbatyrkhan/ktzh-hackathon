@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -20,7 +21,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 @Service
@@ -36,10 +39,10 @@ public class FirebaseInitializerImpl implements FirebaseInitializer {
             e.printStackTrace();
             return null;
         }
-        String docName = from + " - " + to + ", " + date;
+        String docName = route + ", " + date;
         System.out.println("Thread: " + Thread.currentThread().getName());
         Firestore firestore = FirestoreClient.getFirestore();
-        DocumentReference docRef = firestore.collection("parser_data").document(docName);
+        DocumentReference docRef = firestore.collection("parsed_data").document(docName);
         // Add document data  with id "alovelace" using a hashmap
         // from + " - " + to + ", " + date
         Map<String, Object> fData = new HashMap<>();
