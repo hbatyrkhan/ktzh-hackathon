@@ -6,8 +6,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class PredictionDto {
     String station;
     String carClass;
+    String carClassName;
     Integer ticketsSold;
     Integer count;
+
+    public String getCarClassName() {
+        return carClassName;
+    }
+
+    public void setCarClassName(String carClassName) {
+        this.carClassName = carClassName;
+    }
 
     public String getStation() {
         return station;
