@@ -61,7 +61,7 @@ public class FirebaseInitializerImpl implements FirebaseInitializer {
     private void postConstruct() throws FileNotFoundException {
 
         FileInputStream serviceAccount =
-                new FileInputStream("/home/cmaster/IdeaProjects/samruk-hackathon/src/main/resources/static/ktzh-analytics-firebase-adminsdk-9pshx-cfc8e9aec3.json");
+                new FileInputStream("/home/cmaster/IdeaProjects/samruk-hackathon/src/main/resources/static/ktzh-analytics-ac123-firebase-adminsdk-37xf4-79d6751e1b.json");
 
         FirebaseOptions options = null;
         try {
