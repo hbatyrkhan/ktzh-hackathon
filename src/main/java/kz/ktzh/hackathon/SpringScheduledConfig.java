@@ -23,7 +23,7 @@ public class SpringScheduledConfig {
     @Autowired
     private RouteService routeService;
 
-    @Scheduled(fixedRate = 50000)
+    @Scheduled(fixedRate = 1800000)
     public void scheduleFixedRateTask() throws ExecutionException, InterruptedException {
         Firestore firestore = FirestoreClient.getFirestore();
         ApiFuture<QuerySnapshot> data = firestore.collection("parsed_data").get();
